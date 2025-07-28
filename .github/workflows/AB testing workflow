@@ -1,0 +1,43 @@
+name: A/B Testing
+
+on:
+  push: # triggers whenever there's a push on main branch
+    branches:
+      - main
+
+jobs:
+  deploy_model_a: # represents deploying model A
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Deploy Model A
+        run: python src/deploy_model_a.py
+
+  deploy_model_b: # represents deploying model B
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Deploy Model B
+        run: python src/deploy_model_b.py
